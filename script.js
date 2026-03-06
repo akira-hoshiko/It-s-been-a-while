@@ -48,3 +48,19 @@ divPagina.addEventListener('touchend', function(e) {
     }
     mostrarPagina(indice);
 });
+let startX = 0;
+const divPagina = document.getElementById("pagina"); // seu elemento da página
+
+divPagina.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX; // onde começou o toque
+});
+
+divPagina.addEventListener('touchend', function(e) {
+    let endX = e.changedTouches[0].clientX; // onde terminou o toque
+    if (startX - endX > 50) { // swipe pra esquerda -> próxima página
+        if(indice < paginas.length - 1) indice++;
+    } else if (endX - startX > 50) { // swipe pra direita -> página anterior
+        if(indice > 0) indice--;
+    }
+    mostrarPagina(indice); // atualiza o conteúdo da página
+});
