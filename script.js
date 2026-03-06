@@ -49,3 +49,12 @@ divPagina.addEventListener('touchend', function(e) {
 });
     }
 });
+document.getElementById("next").addEventListener("click", () => {
+    if(indice < paginas.length - 1) indice++;
+    mostrarPagina(indice);
+});
+
+document.getElementById("prev").addEventListener("click", () => {
+    if(indice > 0) indice--;
+    mostrarPagina(indice);
+});
