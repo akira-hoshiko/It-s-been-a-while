@@ -32,21 +32,5 @@ document.addEventListener("keydown", function(e) {
     } else if(e.key === "ArrowLeft") {
         if(indice > 0) indice--;
         mostrarPagina(indice);
-});
-
-//// Navegação por toque/swipe (celular)
-let startX = 0;
-divPagina.addEventListener('touchstart', function(e) {
-    startX = e.touches[0].clientX;
-});
-divPagina.addEventListener('touchend', function(e) {
-    let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) { // swipe pra esquerda
-        if(indice < paginas.length - 1) indice++;
-    } else if (endX - startX > 50) { // swipe pra direita
-        if(indice > 0) indice--;
     }
-    mostrarPagina(indice);
 });
-
-   
