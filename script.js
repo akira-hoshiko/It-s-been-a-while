@@ -48,19 +48,54 @@ divPagina.addEventListener('touchend', function(e) {
     }
     mostrarPagina(indice);
 });
+const paginas = [
+    "Primeira página do texto...",
+    "Segunda página do texto...",
+    "Terceira página do texto...",
+    "Quarta página do texto..."
+];
+
+const fundos = [
+    "linear-gradient(135deg, #6a11cb, #2575fc)",
+    "linear-gradient(135deg, #2575fc, #6a11cb)",
+    "linear-gradient(135deg, #1e3c72, #2a5298)",
+    "linear-gradient(135deg, #8e2de2, #4a00e0)"
+];
+
+let indice = 0;
+const divPagina = document.getElementById("pagina");
+
+function mostrarPagina(i) {
+    divPagina.textContent = paginas[i];
+    divPagina.style.background = fundos[i];
+}
+
+mostrarPagina(indice);
+
+// --- setas do computador ---
+document.addEventListener("keydown", function(e) {
+    if(e.key === "ArrowRight") {
+        if(indice < paginas.length - 1) indice++;
+        mostrarPagina(indice);
+    } else if(e.key === "ArrowLeft") {
+        if(indice > 0) indice--;
+        mostrarPagina(indice);
+    }
+});
+
+// --- swipe do celular ---
 let startX = 0;
-const divPagina = document.getElementById("pagina"); // seu elemento da página
 
 divPagina.addEventListener('touchstart', function(e) {
-    startX = e.touches[0].clientX; // onde começou o toque
+    startX = e.touches[0].clientX;
 });
 
 divPagina.addEventListener('touchend', function(e) {
-    let endX = e.changedTouches[0].clientX; // onde terminou o toque
-    if (startX - endX > 50) { // swipe pra esquerda -> próxima página
+    let endX = e.changedTouches[0].clientX;
+    if(startX - endX > 50) { // esquerda -> próxima página
         if(indice < paginas.length - 1) indice++;
-    } else if (endX - startX > 50) { // swipe pra direita -> página anterior
+    } else if(endX - startX > 50) { // direita -> página anterior
         if(indice > 0) indice--;
     }
-    mostrarPagina(indice); // atualiza o conteúdo da página
+    mostrarPagina(indice);
 });
