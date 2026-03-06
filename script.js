@@ -25,6 +25,7 @@ function mostrarPagina(i) {
 
 mostrarPagina(indice);
 
+// --- setas do computador ---
 document.addEventListener("keydown", function(e) {
     if(e.key === "ArrowRight") {
         if(indice < paginas.length - 1) indice++;
@@ -33,4 +34,21 @@ document.addEventListener("keydown", function(e) {
         if(indice > 0) indice--;
         mostrarPagina(indice);
     }
+});
+
+// --- swipe do celular ---
+let startX = 0;
+
+divPagina.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+});
+
+divPagina.addEventListener('touchend', function(e) {
+    let endX = e.changedTouches[0].clientX;
+    if(startX - endX > 50) { // esquerda -> próxima página
+        if(indice < paginas.length - 1) indice++;
+    } else if(endX - startX > 50) { // direita -> página anterior
+        if(indice > 0) indice--;
+    }
+    mostrarPagina(indice);
 });
